@@ -27,23 +27,22 @@ func main() {
 
 	//input := []int{199, 200, 208, 210, 200, 207, 240, 269, 260, 263}
 	input, _ := readLines("input.txt")
-	avgmod := 3
+	sumcnt := 3
 	windows := 4 // A, B, C, D
-	averages := []int{0, 0, 0, 0}
+	sum := []int{0, 0, 0, 0}
 
-	//var baseline int
 	result := 0
 	for i, _ := range input {
 		//Make sure to stop when no window can be created anymore
-		if i+avgmod > len(input) {
+		if i+sumcnt > len(input) {
 			break
 		}
-		//fmt.Printf("Window = %d & average = %d \n", i%windows, input[i]+input[i+1]+input[i+2])
-		averages[i%windows] = input[i] + input[i+1] + input[i+2]
+		//fmt.Printf("Window = %d & sum = %d \n", i%windows, input[i]+input[i+1]+input[i+2])
+		sum[i%windows] = input[i] + input[i+1] + input[i+2]
 
 		if i > 0 { //At first there is nothing to compare
-			//fmt.Printf("average[%d](%d) > average[%d](%d)\n", i%windows, averages[i%windows], (i-1)%windows, averages[(i-1)%windows])
-			if averages[i%windows] > averages[(i-1)%windows] {
+			//fmt.Printf("sum[%d](%d) > sum[%d](%d)\n", i%windows, sum[i%windows], (i-1)%windows, sum[(i-1)%windows])
+			if sum[i%windows] > sum[(i-1)%windows] {
 				result++
 			}
 		}
