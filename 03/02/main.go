@@ -32,8 +32,8 @@ func main() {
 	oxygen = findLastBinary(input, moreOnes, 0, true)[0]
 	co2scrub = findLastBinary(input, moreOnes, 0, false)[0]
 
-	oxygenDecimal, _ := strconv.ParseInt(oxygen, 2, 2^len(oxygen))
-	co2scrubDecimal, _ := strconv.ParseInt(co2scrub, 2, 2^len(co2scrub))
+	oxygenDecimal, _ := strconv.ParseInt(oxygen, 2, 64)
+	co2scrubDecimal, _ := strconv.ParseInt(co2scrub, 2, 64)
 
 	fmt.Println("Oxygen:", oxygenDecimal)
 	fmt.Println("Co2scrub:", co2scrubDecimal)
