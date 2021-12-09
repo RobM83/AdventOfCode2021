@@ -23,13 +23,6 @@ func readLines(path string) ([]string, error) {
 	return lines, scanner.Err()
 }
 
-const (
-	TOP   = 0
-	RIGHT = 1
-	LEFT  = 2
-	DOWN  = 3
-)
-
 type Point struct {
 	row int
 	col int
@@ -53,13 +46,13 @@ func main() {
 }
 
 func getBasinSize(p Point, raster [][]int) int {
-	basinPoints := getBasinPoints(TOP, p, []Point{}, raster)
+	basinPoints := getBasinPoints(p, []Point{}, raster)
 	//fmt.Println(basinPoints)
 
 	return len(basinPoints)
 }
 
-func getBasinPoints(direction int, p Point, points []Point, raster [][]int) []Point {
+func getBasinPoints(p Point, points []Point, raster [][]int) []Point {
 	//Check if point is already in points, then return
 	var exists func(Point) bool
 	exists = func(p Point) bool {
@@ -76,19 +69,19 @@ func getBasinPoints(direction int, p Point, points []Point, raster [][]int) []Po
 
 	//New point, check direction
 	if p.row-1 > -1 && raster[p.row-1][p.col] < 9 && !exists(Point{p.row - 1, p.col}) {
-		points = getBasinPoints(TOP, Point{p.row - 1, p.col}, points, raster)
+		points = getBasinPoints(Point{p.row - 1, p.col}, points, raster)
 	}
 
 	if p.col+1 < len(raster[p.row]) && raster[p.row][p.col+1] < 9 && !exists(Point{p.row, p.col + 1}) {
-		points = getBasinPoints(TOP, Point{p.row, p.col + 1}, points, raster)
+		points = getBasinPoints(Point{p.row, p.col + 1}, points, raster)
 	}
 
 	if p.col-1 > -1 && raster[p.row][p.col-1] < 9 && !exists(Point{p.row, p.col - 1}) {
-		points = getBasinPoints(TOP, Point{p.row, p.col - 1}, points, raster)
+		points = getBasinPoints(Point{p.row, p.col - 1}, points, raster)
 	}
 
 	if p.row+1 < len(raster) && raster[p.row+1][p.col] < 9 && !exists(Point{p.row + 1, p.col}) {
-		points = getBasinPoints(TOP, Point{p.row + 1, p.col}, points, raster)
+		points = getBasinPoints(Point{p.row + 1, p.col}, points, raster)
 	}
 
 	return points
