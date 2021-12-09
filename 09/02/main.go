@@ -75,26 +75,20 @@ func getBasinPoints(direction int, p Point, points []Point, raster [][]int) []Po
 	points = append(points, p)
 
 	//New point, check direction
-	switch direction {
-	case TOP:
-		if p.row-1 > -1 && raster[p.row-1][p.col] < 9 && !exists(Point{p.row - 1, p.col}) {
-			points = getBasinPoints(TOP, Point{p.row - 1, p.col}, points, raster)
-		}
-		fallthrough
-	case RIGHT:
-		if p.col+1 < len(raster[p.row]) && raster[p.row][p.col+1] < 9 && !exists(Point{p.row, p.col + 1}) {
-			points = getBasinPoints(TOP, Point{p.row, p.col + 1}, points, raster)
-		}
-		fallthrough
-	case LEFT:
-		if p.col-1 > -1 && raster[p.row][p.col-1] < 9 && !exists(Point{p.row, p.col - 1}) {
-			points = getBasinPoints(TOP, Point{p.row, p.col - 1}, points, raster)
-		}
-		fallthrough
-	case DOWN:
-		if p.row+1 < len(raster) && raster[p.row+1][p.col] < 9 && !exists(Point{p.row + 1, p.col}) {
-			points = getBasinPoints(TOP, Point{p.row + 1, p.col}, points, raster)
-		}
+	if p.row-1 > -1 && raster[p.row-1][p.col] < 9 && !exists(Point{p.row - 1, p.col}) {
+		points = getBasinPoints(TOP, Point{p.row - 1, p.col}, points, raster)
+	}
+
+	if p.col+1 < len(raster[p.row]) && raster[p.row][p.col+1] < 9 && !exists(Point{p.row, p.col + 1}) {
+		points = getBasinPoints(TOP, Point{p.row, p.col + 1}, points, raster)
+	}
+
+	if p.col-1 > -1 && raster[p.row][p.col-1] < 9 && !exists(Point{p.row, p.col - 1}) {
+		points = getBasinPoints(TOP, Point{p.row, p.col - 1}, points, raster)
+	}
+
+	if p.row+1 < len(raster) && raster[p.row+1][p.col] < 9 && !exists(Point{p.row + 1, p.col}) {
+		points = getBasinPoints(TOP, Point{p.row + 1, p.col}, points, raster)
 	}
 
 	return points
