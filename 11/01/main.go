@@ -28,19 +28,19 @@ func readLines(path string) ([]string, error) {
 }
 
 func main() {
-	input, _ := readLines("input.txt")
+	input, _ := readLines("test.txt")
 
 	grid := buildGrid(input)
 
-	numberOfSteps := 100
+	numberOfSteps := 20
 	totalFlashes := 0
 
 	for i := 0; i < numberOfSteps; i++ {
-		//fmt.Println("Step: ", i+1)
+		fmt.Println("Step: ", i+1)
 		grid = increaseByOne(grid)
 		//fmt.Println(numberOfFlashes(grid))
 		totalFlashes += numberOfFlashes(grid)
-		//printGrid(grid)
+		printGrid(grid)
 		grid = resetFlashed(grid)
 
 	}
@@ -148,6 +148,11 @@ func strToInt(s string) int {
 
 func printGrid(grid [][]Octopus) {
 	for row := 0; row < len(grid); row++ {
-		fmt.Println(append(grid[row]))
+		fmt.Print("\n")
+
+		for col := 0; col < len(grid[row]); col++ {
+			fmt.Print(grid[row][col].value)
+		}
 	}
+	fmt.Print("\n\n")
 }
